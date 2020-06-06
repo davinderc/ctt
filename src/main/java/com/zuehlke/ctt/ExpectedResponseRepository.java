@@ -7,6 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource
-public interface TestSuiteRepository extends CrudRepository<TestSuite, Long> {
-    List<TestSuite> findByTestSuiteId(@Param("testSuiteId") long testSuiteId);
+public interface ExpectedResponseRepository extends CrudRepository<ExpectedResponse, Long> {
+    List<ExpectedResponse> findByExpectedResponseId(@Param("expectedResponseId") long expectedResponseId);
 }

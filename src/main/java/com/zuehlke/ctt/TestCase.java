@@ -10,11 +10,20 @@ public class TestCase implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long testCaseId;
 
+    @Column()
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column
+    private String lastResult;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "testSuiteId")
     private TestSuite testSuite;
+
+    @OneToOne
+    @JoinColumn(name = "expectedResponseId")
+    private ExpectedResponse expectedResponse;
+
 
     public TestCase() {
 
