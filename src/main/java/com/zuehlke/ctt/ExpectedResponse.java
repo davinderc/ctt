@@ -2,9 +2,7 @@ package com.zuehlke.ctt;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -31,12 +29,12 @@ public class ExpectedResponse implements Serializable {
     }
 
     public ExpectedResponse(List<Long> operands, long operationResult) {
-        this.operands = setOperands(operands);
+        setOperands(operands);
         this.operationResult = operationResult;
     }
 
-    private String setOperands(List<Long> operands) {
-        return operands.stream()
+    private void setOperands(List<Long> operands) {
+        this.operands = operands.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(COMMA_STRING));
     }
@@ -52,7 +50,7 @@ public class ExpectedResponse implements Serializable {
     public List<Long> getOperands() {
         List<Long> longOperands = new ArrayList<>(Collections.emptyList());
         for (String element:
-                operands.split(COMMA_STRING)) {
+                this.operands.split(COMMA_STRING)) {
                 longOperands.add(Long.valueOf(element));
         }
         return longOperands;

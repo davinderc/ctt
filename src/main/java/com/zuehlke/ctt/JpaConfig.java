@@ -14,7 +14,7 @@ public class JpaConfig {
     {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:file:~/test");
+        dataSourceBuilder.url("jdbc:h2:file:C:/Users/dach/Dev/javaTraining/ctt/test");
         dataSourceBuilder.username("sa");
         dataSourceBuilder.password("");
         return dataSourceBuilder.build();
