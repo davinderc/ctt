@@ -18,7 +18,7 @@ public class TestCase implements Serializable {
     private long testCaseId;
 
     @Column()
-    private String name;
+    private String testCaseName;
 
     @Column()
     private long expectedResult;
@@ -29,21 +29,16 @@ public class TestCase implements Serializable {
     @Column
     private String lastResult;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "testSuiteId")
     private TestSuite testSuite;
-
-    @OneToOne
-    @JoinColumn(name = "expectedResponseId")
-    private ExpectedResponse expectedResponse;
-
 
     public TestCase() {
 
     }
 
-    public TestCase(String name, List<Long> operands, Long expectedResult) {
-        this.name = name;
+    public TestCase(String testCaseName, List<Long> operands, Long expectedResult) {
+        this.testCaseName = testCaseName;
         setOperands(operands);
         this.expectedResult = expectedResult;
     }
@@ -71,7 +66,11 @@ public class TestCase implements Serializable {
         return testCaseId;
     }
 
-    public String getName() {
-        return name;
+    public String getTestCaseName() {
+        return testCaseName;
+    }
+
+    public void setTestSuite(TestSuite testSuite) {
+        this.testSuite = testSuite;
     }
 }

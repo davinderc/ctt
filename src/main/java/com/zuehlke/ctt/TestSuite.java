@@ -2,6 +2,7 @@ package com.zuehlke.ctt;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,10 @@ public class TestSuite implements Serializable {
     private String testSuiteName;
 
     @OneToMany(mappedBy = "testSuite", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<TestCase> testCases;
+            cascade = CascadeType.PERSIST)
+    private List<TestCase> testCases = new ArrayList<>();
+    // use orphanRemoval = true to delete testCases after testSuite deletes.
+    // CascadeType.ALL seems to require that new testCases get saved directly with the testSuite (CalculatorTestToolApp)
 
     public TestSuite(){
 
@@ -33,7 +36,6 @@ public class TestSuite implements Serializable {
         return testSuiteId;
     }
 
-    public void addTestCase(TestCase testCase){
-        testCases.add(testCase);
-    }
+    public List<TestCase> getTestCases() {return testCases;}
+
 }
